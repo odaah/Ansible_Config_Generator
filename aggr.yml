@@ -1,0 +1,13 @@
+---
+- hosts: local
+  connection: local
+  gather_facts: no
+
+tasks:
+- name: GENERATE CONFIG
+  template:
+  src: ./SVI.j2
+  dest: ./{{ item.vlan }}.conf
+  with_items:
+  - { vrf: NET1, vlan: 502, vlanname: VLAN-502-NAME, net: 10.80.120.128/29 }
+  - { vrf: NET1, vlan: 503, vlanname: VLAN-503-NAME, net: 10.80.120.136/29 }
